@@ -4,9 +4,10 @@ using Moq;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using VehiculoPrueba;
-using VehiculoPrueba.Models;
 using Microsoft.EntityFrameworkCore;
 using VehiculoPrueba.Services;
+using VehiculoPrueba.Core.Models;
+using VehiculoPrueba.Core.Services;
 
 public class VehiculoServiceTests
 {

@@ -1,8 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
-using VehiculoPrueba.Models;
 using VehiculoPrueba.Core.Services;
 using VehiculoPrueba.Core.Interfaces;
+using Microsoft.OpenApi.Models;
 
 namespace VehiculoPrueba
 {
@@ -30,8 +29,9 @@ namespace VehiculoPrueba
             services.AddScoped<ILocalidadService, LocalidadService>();
             services.AddScoped<IVehiculoService, VehiculoService>();
             services.AddScoped<IRentaService, RentaService>();
-            services.AddLogging(); // Agregar servicios de registro
-            services.AddControllers(); // Agregar servicios de controladores
+            services.AddTransient<ITestService, TestService>();
+            services.AddLogging(); 
+            services.AddControllers();
             services.AddHttpContextAccessor();
 
         }

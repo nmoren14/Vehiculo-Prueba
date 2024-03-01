@@ -1,6 +1,4 @@
-using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using VehiculoPrueba;
 using VehiculoPrueba.Core.Interfaces;
 using VehiculoPrueba.Core.Services;
@@ -12,6 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<IVehiculoService, VehiculoService>();
 builder.Services.AddScoped<ILocalidadService, LocalidadService>();
 builder.Services.AddScoped<IRentaService, RentaService>();
+builder.Services.AddTransient<ITestService, TestService>();
 var configuration = builder.Configuration;
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
@@ -22,7 +21,6 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 app.UseSwagger();
 
 app.UseHttpsRedirection();
