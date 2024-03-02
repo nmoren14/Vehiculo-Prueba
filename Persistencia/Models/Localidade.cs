@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace VehiculoPrueba.Core.Models;
+﻿namespace VehiculoPrueba.Persistencia.Models;
 
 public partial class Localidade
 {

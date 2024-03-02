@@ -1,15 +1,16 @@
 ﻿using Microsoft.Extensions.Logging;
 using VehiculoPrueba.Core.Interfaces;
-using VehiculoPrueba.Core.Models;
+using VehiculoPrueba.Persistencia.Interfaces;
+using VehiculoPrueba.Persistencia.Models;
 
 namespace VehiculoPrueba.Core.Services
 {
     public class RentaService : IRentaService
     {
-        private readonly AppDbContext _dbContext;
+        private readonly IAppDbContext _dbContext;
         private readonly ILogger<RentaService> _logger; 
 
-        public RentaService(AppDbContext dbContext, ILogger<RentaService> logger)
+        public RentaService(IAppDbContext dbContext, ILogger<RentaService> logger)
         {
             _dbContext = dbContext;
             _logger = logger;

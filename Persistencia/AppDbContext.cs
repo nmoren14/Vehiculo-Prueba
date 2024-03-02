@@ -1,16 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using VehiculoPrueba.Core.Models;
+using VehiculoPrueba.Persistencia.Interfaces;
+using VehiculoPrueba.Persistencia.Models;
 
-namespace VehiculoPrueba;
+namespace VehiculoPrueba.Persistencia;
 
-public partial class AppDbContext : DbContext
+public partial class AppDbContext : DbContext, IAppDbContext
 {
     public AppDbContext()
     {
     }
 
-    public AppDbContext(DbContextOptions<AppDbContext> options)
-        : base(options)
+    public AppDbContext(DbContextOptions<AppDbContext> options): base(options)
     {
     }
 
@@ -19,6 +19,12 @@ public partial class AppDbContext : DbContext
     public virtual DbSet<Vehiculo> Vehiculos { get; set; }
 
     public virtual DbSet<Rentum> Renta { get; set; }
+
+    public new int SaveChanges()
+    {
+        // Implementación de SaveChanges
+        return base.SaveChanges();
+    }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer("Server=localhost;Database=MilesCarRentalDB;Integrated Security=True;TrustServerCertificate=True;");

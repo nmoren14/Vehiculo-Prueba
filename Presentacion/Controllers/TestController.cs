@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using VehiculoPrueba.Core.Interfaces;
 
-namespace VehiculoPrueba.Adaptadores.Presentacion
+namespace VehiculoPrueba.Presentacion.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

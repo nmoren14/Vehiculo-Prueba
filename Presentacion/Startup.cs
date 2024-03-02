@@ -2,8 +2,10 @@
 using VehiculoPrueba.Core.Services;
 using VehiculoPrueba.Core.Interfaces;
 using Microsoft.OpenApi.Models;
+using VehiculoPrueba.Persistencia;
+using VehiculoPrueba.Persistencia.Interfaces;
 
-namespace VehiculoPrueba
+namespace VehiculoPrueba.Presentacion
 {
     public class Startup
     {
@@ -30,6 +32,7 @@ namespace VehiculoPrueba
             services.AddScoped<IVehiculoService, VehiculoService>();
             services.AddScoped<IRentaService, RentaService>();
             services.AddTransient<ITestService, TestService>();
+            services.AddScoped<IAppDbContext, AppDbContext>();
             services.AddLogging(); 
             services.AddControllers();
             services.AddHttpContextAccessor();
@@ -43,12 +46,22 @@ namespace VehiculoPrueba
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "VehiculoPrueba V1");
-                c.RoutePrefix = "swagger/ui";
+                c.RoutePrefix = "";
             });
+            // Redirección estática a Swagger
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
             app.UseHttpsRedirection();
             app.UseRouting();
+            // Configuración del enrutamiento
             app.UseEndpoints(endpoints =>
             {
+                // Establecer la ruta predeterminada
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "/swagger/index.html");
+
                 endpoints.MapControllers();
             });
         }

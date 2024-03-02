@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using VehiculoPrueba.Core.Models;
+﻿using VehiculoPrueba.Persistencia.Models;
 
 namespace VehiculoPrueba.Core.Interfaces
 {

@@ -1,17 +1,15 @@
-﻿// Agrega esto en tu archivo LocalidadService.cs dentro del directorio Services
-using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.Extensions.Logging;
 using VehiculoPrueba.Core.Interfaces;
-using VehiculoPrueba.Core.Models;
+using VehiculoPrueba.Persistencia.Interfaces;
+using VehiculoPrueba.Persistencia.Models;
 
 namespace VehiculoPrueba.Core.Services
 {
     public class LocalidadService : ILocalidadService
     {
-        private readonly AppDbContext _dbContext;
+        private readonly IAppDbContext _dbContext;
         private readonly ILogger<LocalidadService> _logger; 
-        public LocalidadService(AppDbContext dbContext, ILogger<LocalidadService> logger)
+        public LocalidadService(IAppDbContext dbContext, ILogger<LocalidadService> logger)
         {
             _dbContext = dbContext;
             _logger = logger;
@@ -22,6 +20,11 @@ namespace VehiculoPrueba.Core.Services
             try
             {
                 var Localidades = _dbContext.Localidades.ToList();
+                if (Localidades.Count == 0)
+                {
+                    _logger.LogInformation($"No se encontraron Localidades.");
+                    return Localidades;
+                }
                 _logger.LogInformation($"Se han obtenido {Localidades.Count} localidades.");
                 return Localidades;
                 

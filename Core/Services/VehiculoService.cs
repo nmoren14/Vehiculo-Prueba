@@ -1,14 +1,15 @@
 ﻿using Microsoft.Extensions.Logging;
-using VehiculoPrueba.Core.Models;
+using VehiculoPrueba.Persistencia.Interfaces;
+using VehiculoPrueba.Persistencia.Models;
 
 namespace VehiculoPrueba.Core.Services
 {
     public class VehiculoService : IVehiculoService
     {
-        private readonly AppDbContext _dbContext;
+        private readonly IAppDbContext _dbContext;
         private readonly ILogger<VehiculoService> _logger;
 
-        public VehiculoService(AppDbContext dbContext, ILogger<VehiculoService> logger)
+        public VehiculoService(IAppDbContext dbContext, ILogger<VehiculoService> logger)
         {
             _dbContext = dbContext;
             _logger = logger;
@@ -37,27 +38,6 @@ namespace VehiculoPrueba.Core.Services
                 throw;
             }
         }
-
-        public List<Localidade> ObtenerLocalidadesDisponibles()
-        {
-            try
-            {
-                var localidadesDisponibles = _dbContext.Localidades.ToList();
-
-                if (localidadesDisponibles.Count == 0)
-                {
-                    _logger.LogInformation($"No se encontraron Localidades.");
-                    return localidadesDisponibles;
-                }
                 
-                _logger.LogInformation($"Se encontraron {localidadesDisponibles.Count} Localidades.");
-                return localidadesDisponibles;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Ocurrió un error al obtener Localidades disponibles.");
-                throw;
-            }
-        }
     }
 }

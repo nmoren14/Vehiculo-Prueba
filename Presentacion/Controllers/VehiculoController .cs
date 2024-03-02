@@ -1,49 +1,37 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using VehiculoPrueba.Core.Interfaces;
-using VehiculoPrueba.Core.Models;
+using VehiculoPrueba.Persistencia.Models;
 
-[ApiController]
-[Route("Vehiculos")]
-public class VehiculoController : ControllerBase
+namespace VehiculoPrueba.Presentacion.Controllers
 {
-    private readonly IVehiculoService _vehiculoService;
-    private readonly ILogger<VehiculoController> _logger;
-    private readonly ILocalidadService _localidadService;
-
-    public VehiculoController(IVehiculoService vehiculoService, ILogger<VehiculoController> logger, ILocalidadService localidadService)
+    [ApiController]
+    [Route("Vehiculos")]
+    public class VehiculoController : ControllerBase
     {
-        _vehiculoService = vehiculoService;
-        _logger = logger;
-        _localidadService = localidadService;
-    }
+        private readonly IVehiculoService _vehiculoService;
+        private readonly ILogger<VehiculoController> _logger;
+        private readonly ILocalidadService _localidadService;
 
-    [HttpGet("VehDdisponibles")]
-    public ActionResult<List<Vehiculo>> ObtenerVehiculosDisponibles(int localidadRecogidaId)
-    {
-        try
+        public VehiculoController(IVehiculoService vehiculoService, ILogger<VehiculoController> logger, ILocalidadService localidadService)
         {
-            var vehiculosDisponibles = _vehiculoService.ObtenerVehiculosDisponibles(localidadRecogidaId);
-            return Ok(vehiculosDisponibles);
+            _vehiculoService = vehiculoService;
+            _logger = logger;
+            _localidadService = localidadService;
         }
-        catch (Exception ex)
-        {
-            // Manejar la excepción
-            return StatusCode(500, "Ocurrió un error interno al procesar la solicitud.");
-        }
-    }
 
-    [HttpGet("LocalDisponibles")]
-    public ActionResult<List<Localidade>> ObtenerLocalidadesDisponibles()
-    {
-        try
+        [HttpGet("VehDdisponibles")]
+        public ActionResult<List<Vehiculo>> ObtenerVehiculosDisponibles(int localidadRecogidaId)
         {
-            var velocalidadesDisponibles = _vehiculoService.ObtenerLocalidadesDisponibles();
-            return Ok(velocalidadesDisponibles);
-        }
-        catch (Exception ex)
-        {
-            // Manejar la excepción
-            return StatusCode(500, "Ocurrió un error interno al procesar la solicitud.");
+            try
+            {
+                var vehiculosDisponibles = _vehiculoService.ObtenerVehiculosDisponibles(localidadRecogidaId);
+                return Ok(vehiculosDisponibles);
+            }
+            catch (Exception ex)
+            {
+                // Manejar la excepción
+                return StatusCode(500, "Ocurrió un error interno al procesar la solicitud. ");
+            }
         }
     }
 }

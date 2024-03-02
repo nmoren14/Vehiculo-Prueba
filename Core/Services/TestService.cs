@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using VehiculoPrueba.Core.Interfaces;
-using VehiculoPrueba.Core.Models;
+using VehiculoPrueba.Persistencia;
 
 namespace VehiculoPrueba.Core.Services
 {
