@@ -5,7 +5,6 @@ using VehiculoPrueba.Core.Services;
 using VehiculoPrueba.Persistencia.Interfaces;
 using VehiculoPrueba.Persistencia.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using VehiculoPrueba.Core.Interfaces;
 using VehiculoPrueba.Presentacion.Controllers;
@@ -30,10 +29,7 @@ namespace TestProject
             Assert.NotNull(result);
             Assert.IsType<List<Localidade>>(result);
         }
-    }
 
-    public class LocalidadControllerTests
-    {
         [Fact]
         public void ObtenerLocalidadesDisponibles_DeberiaRetornarOk()
         {

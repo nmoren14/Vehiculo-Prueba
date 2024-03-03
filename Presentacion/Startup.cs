@@ -46,7 +46,7 @@ namespace VehiculoPrueba.Presentacion
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "VehiculoPrueba V1");
-                c.RoutePrefix = "";
+                c.RoutePrefix = string.Empty;
             });
             // Redirección estática a Swagger
             app.UseDefaultFiles();
@@ -57,11 +57,9 @@ namespace VehiculoPrueba.Presentacion
             // Configuración del enrutamiento
             app.UseEndpoints(endpoints =>
             {
-                // Establecer la ruta predeterminada
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "/swagger/index.html");
-
+                    name: "swagger",
+                    pattern: "{controller=Swagger}/{action=Index}/{id?}");
                 endpoints.MapControllers();
             });
         }
